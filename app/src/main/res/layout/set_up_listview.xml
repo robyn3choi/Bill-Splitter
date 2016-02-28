@@ -35,7 +35,8 @@
     <ListView
         android:id="@+id/list_person"
         android:layout_width="fill_parent"
-        android:layout_height="327dp">
+        android:layout_height="327dp"
+        android:layout_weight="0.89">
     </ListView>
 
     <Button
