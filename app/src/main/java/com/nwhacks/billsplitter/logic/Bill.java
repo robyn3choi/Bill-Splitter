@@ -67,4 +67,12 @@ public class Bill implements Serializable{
         this.tip = tip;
         withTip = true;
     }
+
+    public Person getGuestFromName(String guestName) {
+        for (int x = 0; x < people.size(); x++) {
+            if (people.get(x).getName() == guestName)
+                return people.get(x);
+        }
+        return null;
+    }
 }

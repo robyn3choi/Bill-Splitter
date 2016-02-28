@@ -12,6 +12,7 @@ public class Person {
     public Person(String name) {
         this.name = name;
         totalPrice = 0.00;
+        listOfItem = new ArrayList<SplitItem>();
     }
 
     public void addItem(SplitItem item) {

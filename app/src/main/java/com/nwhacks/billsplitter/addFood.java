@@ -53,13 +53,16 @@ public class addFood extends DialogFragment {
             positiveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EditText itemNameText = (EditText) d.findViewById(R.id.item);
-                    EditText priceText = (EditText) d.findViewById(R.id.price);
-                    EditText quantityText = (EditText) d.findViewById(R.id.quantity);
+                    EditText itemNameText = (EditText) d.findViewById(R.id.ItemName);
+                    EditText priceText = (EditText) d.findViewById(R.id.Price);
+                    EditText quantityText = (EditText) d.findViewById(R.id.Quantity);
 
-                    final String itemName = "Hello";
-                    final String price = "Hello";
-                    final String quantity = "Hello";
+                    String itemName = itemNameText.getText().toString();
+                    String price = priceText.getText().toString();
+                    String quantity = quantityText.getText().toString();
+
+                    MainActivity callingActivity = (MainActivity) getActivity();
+                    callingActivity.addFoodItem(itemName, price, quantity);
                     d.dismiss();
                 }
             });

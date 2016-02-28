@@ -15,6 +15,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.nwhacks.billsplitter.logic.Bill;
 import com.nwhacks.billsplitter.logic.Person;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private android.widget.RelativeLayout.LayoutParams layoutParams;
 
     Intent intent;
+    Bill bill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         intent = getIntent();
-        Bill bill = (Bill)intent.getSerializableExtra("sendBill");
+        bill = (Bill)intent.getSerializableExtra("sendBill");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -51,36 +54,84 @@ public class MainActivity extends AppCompatActivity {
         });
 
         guests = bill.getPeople();
+        mealItems = bill.getItems();
 
         //for testing
-        Person robyn = new Person("robyn");
-        Person johnny = new Person("johnny");
-        Person tony = new Person("tony");
-        Person ian = new Person("ian");
-        Person stuart = new Person("stuart");
-        Person cam = new Person("cam");
-        Person chris = new Person("chris");
-        Person isaac = new Person("isaac");
-        Person sam = new Person("sam");
-        Person jlee = new Person("jlee");
-        Person sarah = new Person("sarah");
-        Person brian = new Person("brian");
-
-        guests.add(robyn);
-        guests.add(johnny);
-        guests.add(tony);
-        guests.add(ian);
-        guests.add(stuart);
-        guests.add(cam);
-        guests.add(chris);
-        guests.add(isaac);
-        guests.add(sam);
-        guests.add(jlee);
-        guests.add(sarah);
-        guests.add(brian);
+//        Person robyn = new Person("robyn");
+//        Person johnny = new Person("johnny");
+//        Person tony = new Person("tony");
+//        Person ian = new Person("ian");
+//        Person stuart = new Person("stuart");
+//        Person cam = new Person("cam");
+//        Person chris = new Person("chris");
+//        Person isaac = new Person("isaac");
+//        Person sam = new Person("sam");
+//        Person jlee = new Person("jlee");
+//        Person sarah = new Person("sarah");
+//        Person brian = new Person("brian");
+//
+//        guests.add(robyn);
+//        guests.add(johnny);
+//        guests.add(tony);
+//        guests.add(ian);
+//        guests.add(stuart);
+//        guests.add(cam);
+//        guests.add(chris);
+//        guests.add(isaac);
+//        guests.add(sam);
+//        guests.add(jlee);
+//        guests.add(sarah);
+//        guests.add(brian);
 
 
         setUpIcons();
+
+
+        Button viewItemsButton = (Button)findViewById(R.id.viewItemsButton);
+        viewItemsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // go to itemsListActivity
+            }
+        });
+    }
+
+    /**
+     * callback method from QuantityDialogFragment, returning the value of user
+     * input.
+     *
+     */
+    public void addFoodItem(String itemName, String price, String quantity) {
+        Double priceDouble = Double.parseDouble(price);
+        int quantityInt = Integer.parseInt(quantity);
+        SplitItem item = new SplitItem(itemName, priceDouble, quantityInt);
+        bill.getItems().add(item);
+
+
+        //ImageView Setup
+        ImageView plateIcon = new ImageView(this);
+        //setting image resource
+        plateIcon.setImageResource(R.mipmap.plate_icon);
+        //setting image position
+
+        plateIcon.setLayoutParams(new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT));
+        RelativeLayout.LayoutParams layoutParams =
+                (RelativeLayout.LayoutParams)plateIcon.getLayoutParams();
+        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        plateIcon.setLayoutParams(layoutParams);
+        plateIcon.getLayoutParams().height = dpToPixels(140);
+        plateIcon.getLayoutParams().width = dpToPixels(140);
+
+        //adding view to layout
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout1);
+        relativeLayout.addView(plateIcon);
+
+        TextView itemNameText = (TextView) findViewById(R.id.itemNameTextView);
+        itemNameText.setText(itemName);
+
+        plateIcon.setOnTouchListener(new ImageTouchListener());
+
     }
 
     private final class ImageTouchListener implements View.OnTouchListener {
@@ -124,7 +175,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case DragEvent.ACTION_DROP:
                     GradientDrawable drawable = (GradientDrawable) dropTarget.getBackground();
-                    drawable.setStroke(3, Color.parseColor("#00E1FF")); // set stroke width and stroke color
+                    drawable.setStroke(dpToPixels(3), Color.parseColor("#00E1FF")); // set stroke width and stroke color
+                    String guestName = dropTarget.getText().toString();
+                    Person guest = bill.getGuestFromName(guestName);
+                    bill.addPersonToItem(guest, bill.getItems().get(bill.getItems().size()-1));
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
                     //no action necessary
@@ -136,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,14 +215,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void addMealItem(SplitItem item) {
-        mealItems.add(item);
-    }
 
     public void setUpIcons() {
 
-        plateIcon = (ImageView) findViewById(R.id.plate_icon);
-        plateIcon.setOnTouchListener(new ImageTouchListener());
 
         CircleLayout circleLayout = (CircleLayout) findViewById(R.id.circleLayout);
         for(int x=0; x < guests.size(); x++) {
@@ -176,9 +226,7 @@ public class MainActivity extends AppCompatActivity {
             guestName.setText(guests.get(x).getName());
             guestName.setBackgroundResource(R.drawable.rounded_button);
 
-            final float scale = getResources().getDisplayMetrics().density;
-            int pixels = (int) (80 * scale + 0.5f);
-
+            int pixels = dpToPixels(80);
             CircleLayout.LayoutParams params = new CircleLayout.LayoutParams(pixels,pixels);
             guestName.setLayoutParams(params);
             circleLayout.addView(guestName);
@@ -186,4 +234,9 @@ public class MainActivity extends AppCompatActivity {
             guestName.setOnDragListener(new ImageDragListener());
         }
     }
+    public int dpToPixels(int dp) {
+        final float scale = getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
+    }
+
 }
