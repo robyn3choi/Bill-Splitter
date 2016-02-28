@@ -22,9 +22,10 @@ import com.nwhacks.billsplitter.logic.Bill;
 import com.nwhacks.billsplitter.logic.Person;
 import com.nwhacks.billsplitter.logic.SplitItem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable{
 
     ArrayList<SplitItem> mealItems;
     ArrayList<com.nwhacks.billsplitter.logic.Person> guests;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private android.widget.RelativeLayout.LayoutParams layoutParams;
 
     Intent intent;
-
+    Person person;
     Bill bill;
 
     @Override
@@ -197,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
         CircleLayout circleLayout = (CircleLayout) findViewById(R.id.circleLayout);
         for(int x=0; x < guests.size(); x++) {
 
-            Button guestName = new Button(MainActivity.this);
+            final Button guestName = new Button(MainActivity.this);
             guestName.setText(guests.get(x).getName());
             guestName.setBackgroundResource(R.drawable.rounded_button);
 
@@ -205,21 +206,17 @@ public class MainActivity extends AppCompatActivity {
             CircleLayout.LayoutParams params = new CircleLayout.LayoutParams(pixels,pixels);
             guestName.setLayoutParams(params);
             circleLayout.addView(guestName);
-
             guestName.setOnDragListener(new ImageDragListener());
-            guestName.setOnClickListener(new personOnClickListener());
+            guestName.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view){
+                    person = bill.getGuestFromName(guestName.getText().toString());
+                    intent = new Intent(MainActivity.this, UserSummary.class);
+                    intent.putExtra("userSend", (Serializable)person);
+                    startActivity(intent);
+                }
+            });
         }
     }
-
-    private class personOnClickListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-
-        }
-    }
-
-
 
     public int dpToPixels(int dp) {
         final float scale = getResources().getDisplayMetrics().density;

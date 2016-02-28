@@ -1,11 +1,12 @@
 package com.nwhacks.billsplitter.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Ian Fong on 2016-02-27.
  */
-public class SplitItem {
+public class SplitItem implements Serializable{
     private String name;
     private int quantity;
     private double price;

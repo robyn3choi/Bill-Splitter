@@ -14,8 +14,10 @@ import com.nwhacks.billsplitter.logic.Bill;
 import com.nwhacks.billsplitter.logic.Person;
 import com.nwhacks.billsplitter.logic.PersonAdapter;
 
+import java.io.Serializable;
 
-public class SetUp extends AppCompatActivity {
+
+public class SetUp extends AppCompatActivity implements Serializable {
 
     // Array of strings..
     private EditText text;
