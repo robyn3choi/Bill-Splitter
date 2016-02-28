@@ -52,10 +52,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListItem);
 
         txtListChild.setText(childText);
-        TextView txt = (TextView) convertView.findViewById(R.id.textView);
+        EditText txt = (EditText) convertView.findViewById(R.id.textView);
         this.headerItems.getItems().get(groupPosition).recalculateCostPerPerson();
         String text = String.format("$%.2f", this.headerItems.getItems().get(groupPosition).getCostPerPerson());
-        txt.setText(text);
+
+        if ( !(txt.getText().toString().equalsIgnoreCase("Medium Text")) && (txt.toString() != text) ) {
+            txt.setText(txt.getText().toString());
+        } else {
+            txt.setText(text);
+
+        }
 
 //        TextView percentage = (TextView) convertView.findViewById(R.id.percentage);
 

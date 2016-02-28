@@ -21,13 +21,14 @@
         <!--android:id="@+id/percentage"-->
         <!--android:editable="true" />-->
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/textView"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"
+        android:inputType="number"/>
 
 
 </LinearLayout>
