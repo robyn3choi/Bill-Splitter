@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Person {
     String name;
     double totalPrice;
-    ArrayList<SplitItem> listOfItem;
+    private ArrayList<SplitItem> listOfItem = new ArrayList<>();
 
     public Person(String name) {
         this.name = name;
