@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.nwhacks.billsplitter.logic.Bill;
-import com.nwhacks.billsplitter.logic.Person;
 import com.nwhacks.billsplitter.logic.SplitItem;
 
 import java.util.ArrayList;
@@ -53,31 +52,31 @@ public class MainActivity extends AppCompatActivity {
         guests = bill.getPeople();
 
         //for testing
-        Person robyn = new Person("robyn");
-        Person johnny = new Person("johnny");
-        Person tony = new Person("tony");
-        Person ian = new Person("ian");
-        Person stuart = new Person("stuart");
-        Person cam = new Person("cam");
-        Person chris = new Person("chris");
-        Person isaac = new Person("isaac");
-        Person sam = new Person("sam");
-        Person jlee = new Person("jlee");
-        Person sarah = new Person("sarah");
-        Person brian = new Person("brian");
-
-        guests.add(robyn);
-        guests.add(johnny);
-        guests.add(tony);
-        guests.add(ian);
-        guests.add(stuart);
-        guests.add(cam);
-        guests.add(chris);
-        guests.add(isaac);
-        guests.add(sam);
-        guests.add(jlee);
-        guests.add(sarah);
-        guests.add(brian);
+//        Person robyn = new Person("robyn");
+//        Person johnny = new Person("johnny");
+//        Person tony = new Person("tony");
+//        Person ian = new Person("ian");
+//        Person stuart = new Person("stuart");
+//        Person cam = new Person("cam");
+//        Person chris = new Person("chris");
+//        Person isaac = new Person("isaac");
+//        Person sam = new Person("sam");
+//        Person jlee = new Person("jlee");
+//        Person sarah = new Person("sarah");
+//        Person brian = new Person("brian");
+//
+//        guests.add(robyn);
+//        guests.add(johnny);
+//        guests.add(tony);
+//        guests.add(ian);
+//        guests.add(stuart);
+//        guests.add(cam);
+//        guests.add(chris);
+//        guests.add(isaac);
+//        guests.add(sam);
+//        guests.add(jlee);
+//        guests.add(sarah);
+//        guests.add(brian);
 
 
         setUpIcons();
