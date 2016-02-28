@@ -22,23 +22,29 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import com.nwhacks.billsplitter.logic.*;
+
+import com.nwhacks.billsplitter.logic.Bill;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Item> mealItems;
-    ArrayList<Person> guests;
+    ArrayList<SplitItem> mealItems;
+    ArrayList<com.nwhacks.billsplitter.logic.Person> guests;
     ImageView plateIcon;
 
     String msg;
     private android.widget.RelativeLayout.LayoutParams layoutParams;
 
+    Bill bill = new Bill();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        guests = bill.getPeople();
 
         //for testing
         Person robyn = new Person("robyn");
@@ -54,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         Person sarah = new Person("sarah");
         Person brian = new Person("brian");
 
-        guests = new ArrayList<Person>();
         guests.add(robyn);
         guests.add(johnny);
         guests.add(tony);
@@ -112,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     //no action necessary
                     break;
                 case DragEvent.ACTION_DROP:
-                    GradientDrawable drawable = (GradientDrawable)dropTarget.getBackground();
+                    GradientDrawable drawable = (GradientDrawable) dropTarget.getBackground();
                     drawable.setStroke(3, Color.parseColor("#00E1FF")); // set stroke width and stroke color
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
@@ -122,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             return true;
+
         }
     }
 
@@ -148,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void addMealItem(Item item) {
+    public void addMealItem(SplitItem item) {
         mealItems.add(item);
     }
 
@@ -174,6 +180,4 @@ public class MainActivity extends AppCompatActivity {
             guestName.setOnDragListener(new ImageDragListener());
         }
     }
-
-
 }

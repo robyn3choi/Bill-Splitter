@@ -1,7 +1,5 @@
 package com.nwhacks.billsplitter.logic;
 
-import com.nwhacks.billsplitter.Person;
-
 import java.util.ArrayList;
 
 /**
@@ -23,6 +21,15 @@ public class SplitItem {
     public void addParticipant(Person person) {
         participants.add(person);
         costPerPerson = (price * quantity) / participants.size();
+    }
+
+    public void removeParticipant(Person person) {
+        participants.remove(person);
+        if(participants.size() == 0) {
+            costPerPerson = price * quantity;
+        } else {
+            costPerPerson = (price * quantity) / participants.size();
+        }
     }
 
     public double getTotalCost() {

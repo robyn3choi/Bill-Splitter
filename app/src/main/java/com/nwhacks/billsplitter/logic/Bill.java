@@ -1,7 +1,5 @@
 package com.nwhacks.billsplitter.logic;
 
-import com.nwhacks.billsplitter.Person;
-
 import java.util.ArrayList;
 
 /**
@@ -25,7 +23,12 @@ public class Bill {
         withTip = false;
     }
 
-    public void addSplitItem(String name, double price, int quantity) {
+    public Bill() {
+        tax = 0;
+        withTip = false;
+    }
+
+    public void addItem(String name, double price, int quantity) {
         SplitItem item = new SplitItem(name, price, quantity);
         Bill.items.add(item);
     }
@@ -33,6 +36,24 @@ public class Bill {
     public void addPerson(String name) {
         Person person = new Person(name);
         people.add(person);
+    }
+
+    public void addPersonToItem(Person person, SplitItem item) {
+        person.addItem(item);
+        item.addParticipant(person);
+    }
+
+    public void removePersonFromItem(Person person, SplitItem item) {
+        person.removeItem(item);
+        item.removeParticipant(person);
+    }
+
+    public static ArrayList<SplitItem> getItems() {
+        return items;
+    }
+
+    public static ArrayList<Person> getPeople() {
+        return people;
     }
 
     public double getTotalCost() {
@@ -45,5 +66,14 @@ public class Bill {
         }
         sum = sum * tax;
         return sum;
+    }
+
+    public void setTax(double tax) {
+        this.tax = tax;
+    }
+
+    public void setTip(double tip) {
+        this.tip = tip;
+        withTip = true;
     }
 }
