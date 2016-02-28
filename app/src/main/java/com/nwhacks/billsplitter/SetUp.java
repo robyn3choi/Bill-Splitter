@@ -8,18 +8,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-<<<<<<< HEAD
-
-import java.util.ArrayList;
-=======
 import java.util.ArrayList;
 import com.nwhacks.billsplitter.logic.Person;
->>>>>>> 0a1fa89fa82b3133b77bc5cf28582b1be91441d6
+import com.nwhacks.billsplitter.logic.PersonAdapter;
 
 
 public class SetUp extends AppCompatActivity {
 
-<<<<<<< HEAD
     // Array of strings..
     private ArrayList<Person> personList = new ArrayList<Person>();
     private EditText text;
@@ -84,35 +79,4 @@ public class SetUp extends AppCompatActivity {
             }
         }
     }
-=======
-//    // Array of strings..
-//    private ArrayList<Person> personList = new ArrayList<Person>();
-//    private EditText text;
-//    private PersonAdapter adapter;
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.set_up_listview);
-//        text = (EditText) findViewById(R.id.nameText);
-//        adapter = new PersonAdapter(this, R.layout.set_up_textview, personList);
-//        ListView listView = (ListView) findViewById(R.id.list_person);
-//        listView.setAdapter(adapter);
-//        listView.setClickable(true);
-//        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//                return false;
-//            }
-//        });
-//    }
-//    //adds a person to a list
-//    public void addPerson(View v){
-//        if(text.getText().toString().trim().length() != 0) {
-//            String personName = text.getText().toString();
-//            personList.add(new Person(personName));
-//            adapter.notifyDataSetChanged();
-//            text.setText("");
-//        }
-//    }
->>>>>>> 0a1fa89fa82b3133b77bc5cf28582b1be91441d6
 }
