@@ -30,12 +30,32 @@ public class Bill {
 
     public void addItem(String name, double price, int quantity) {
         SplitItem item = new SplitItem(name, price, quantity);
-        Bill.items.add(item);
+        if(!items.contains(item)){
+            Bill.items.add(item);
+        }
+    }
+
+    public void removeItem(String name) {
+        for(SplitItem item: items) {
+            if(item.getName().equals(name)) {
+                items.remove(item);
+            }
+        }
     }
 
     public void addPerson(String name) {
         Person person = new Person(name);
-        people.add(person);
+        if(!people.contains(person)) {
+            people.add(person);
+        }
+    }
+
+    public void removePerson(String name) {
+        for(Person person: people) {
+            if(person.getName().equals(name)) {
+                people.remove(person);
+            }
+        }
     }
 
     public void addPersonToItem(Person person, SplitItem item) {

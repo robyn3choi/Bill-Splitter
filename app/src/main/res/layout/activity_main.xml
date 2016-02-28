@@ -5,17 +5,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:id="@+id/linearLayout1">
+    android:clipChildren="false"
+    android:id="@+id/relativeLayout1">
+
 
     <com.nwhacks.billsplitter.CircleLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
         app:angleOffset="90.0"
-        android:id="@+id/circleLayout">
+        android:id="@+id/circleLayout"
+        android:layout_gravity="fill"
+        android:clipChildren="false">
 
         <!-- Add here any views you want -->
 
     </com.nwhacks.billsplitter.CircleLayout>
+
+    <ImageView
+        android:id="@+id/plate_icon"
+        android:src="@mipmap/plate_icon"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>
