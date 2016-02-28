@@ -66,4 +66,9 @@ public class addFood extends DialogFragment {
         }
     }
 
+    public double calculatePercentage(double percentage, double totalPrice) {
+        return percentage*0.01*totalPrice;
+    }
+
+
 }
