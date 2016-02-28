@@ -1,5 +1,7 @@
 package com.nwhacks.billsplitter.logic;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -30,8 +32,10 @@ public class Bill implements Serializable{
     }
 
     public void addPersonToItem(Person person, SplitItem item) {
-        person.addItem(item);
-        item.addParticipant(person);
+        if(people.contains(person) && items.contains(item)) {
+            person.addItem(item);
+            item.addParticipant(person);
+        }
     }
 
     public void removePersonFromItem(Person person, SplitItem item) {

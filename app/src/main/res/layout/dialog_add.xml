@@ -16,17 +16,17 @@
         android:hint="@string/itemName" />
     <EditText
         android:id="@+id/Price"
-        android:inputType="textVisiblePassword|textNoSuggestions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="4dp"
+        android:inputType="number"
         android:hint="@string/price" />
     <EditText
         android:id="@+id/Quantity"
-        android:inputType="textVisiblePassword|textNoSuggestions"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

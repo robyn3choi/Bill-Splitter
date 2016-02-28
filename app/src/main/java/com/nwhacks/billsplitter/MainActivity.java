@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private android.widget.RelativeLayout.LayoutParams layoutParams;
 
     Intent intent;
+
     Bill bill;
 
     @Override
@@ -56,43 +57,14 @@ public class MainActivity extends AppCompatActivity {
         guests = bill.getPeople();
         mealItems = bill.getItems();
 
-        //for testing
-//        Person robyn = new Person("robyn");
-//        Person johnny = new Person("johnny");
-//        Person tony = new Person("tony");
-//        Person ian = new Person("ian");
-//        Person stuart = new Person("stuart");
-//        Person cam = new Person("cam");
-//        Person chris = new Person("chris");
-//        Person isaac = new Person("isaac");
-//        Person sam = new Person("sam");
-//        Person jlee = new Person("jlee");
-//        Person sarah = new Person("sarah");
-//        Person brian = new Person("brian");
-//
-//        guests.add(robyn);
-//        guests.add(johnny);
-//        guests.add(tony);
-//        guests.add(ian);
-//        guests.add(stuart);
-//        guests.add(cam);
-//        guests.add(chris);
-//        guests.add(isaac);
-//        guests.add(sam);
-//        guests.add(jlee);
-//        guests.add(sarah);
-//        guests.add(brian);
-
-
         setUpIcons();
 
-
-        Button viewItemsButton = (Button)findViewById(R.id.viewItemsButton);
-        viewItemsButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // go to itemsListActivity
-            }
-        });
+//        Button viewItemsButton = (Button)findViewById(R.id.viewItemsButton);
+//        viewItemsButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                // go to itemsListActivity
+//            }
+//        });
     }
 
     /**
@@ -105,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         int quantityInt = Integer.parseInt(quantity);
         SplitItem item = new SplitItem(itemName, priceDouble, quantityInt);
         bill.getItems().add(item);
-
 
         //ImageView Setup
         ImageView plateIcon = new ImageView(this);
@@ -131,6 +102,12 @@ public class MainActivity extends AppCompatActivity {
         itemNameText.setText(itemName);
 
         plateIcon.setOnTouchListener(new ImageTouchListener());
+
+        CircleLayout circleLayout = (CircleLayout) findViewById(R.id.circleLayout);
+        for (int x=0; x<circleLayout.getChildCount(); x++) {
+            GradientDrawable drawable = (GradientDrawable) circleLayout.getChildAt(x).getBackground();
+            drawable.setStroke(dpToPixels(3), Color.parseColor("#000000")); // set stroke width and stroke color
+        }
 
     }
 
@@ -217,8 +194,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void setUpIcons() {
-
-
         CircleLayout circleLayout = (CircleLayout) findViewById(R.id.circleLayout);
         for(int x=0; x < guests.size(); x++) {
 
@@ -232,11 +207,29 @@ public class MainActivity extends AppCompatActivity {
             circleLayout.addView(guestName);
 
             guestName.setOnDragListener(new ImageDragListener());
+            guestName.setOnClickListener(new personOnClickListener());
         }
     }
+
+    private class personOnClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+
+        }
+    }
+
+
+
     public int dpToPixels(int dp) {
         final float scale = getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }
 
+
+    public void viewItems(View view){
+        intent = new Intent(this, FoodToPeople.class);
+        intent.putExtra("itemSend", bill);
+        startActivity(intent);
+    }
 }

@@ -9,6 +9,8 @@ public class SplitItem {
     private String name;
     private int quantity;
     private double price;
+
+
     private ArrayList<Person> participants = new ArrayList<>();
     private double costPerPerson;
 
@@ -30,6 +32,10 @@ public class SplitItem {
         } else {
             costPerPerson = (price * quantity) / participants.size();
         }
+    }
+
+    public ArrayList<Person> getParticipants() {
+        return participants;
     }
 
     public double getTotalCost() {
@@ -62,21 +68,5 @@ public class SplitItem {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SplitItem splitItem = (SplitItem) o;
-
-        return name.equals(splitItem.name);
-
-    }
-
-    @Override
-    public int hashCode() {
-        return name.hashCode();
     }
 }
