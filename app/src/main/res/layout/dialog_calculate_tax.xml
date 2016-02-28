@@ -15,12 +15,13 @@
 
     <EditText
         android:id="@+id/taxPercentage"
-        android:inputType="textVisiblePassword|textNoSuggestions"
         android:layout_width="66dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="4dp" />
+        android:layout_marginBottom="4dp"
+        android:inputType="numberDecimal"
+        android:hint="13" />
 
 </LinearLayout>

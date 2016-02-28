@@ -97,10 +97,9 @@ public class MainActivity extends AppCompatActivity {
      * input.
      *
      */
-    public void addFoodItem(String itemName, String price, String quantity) {
+    public void addFoodItem(String itemName, String price) {
         Double priceDouble = Double.parseDouble(price);
-        int quantityInt = Integer.parseInt(quantity);
-        SplitItem item = new SplitItem(itemName, priceDouble, quantityInt);
+        SplitItem item = new SplitItem(itemName, priceDouble);
         bill.getItems().add(item);
 
         //ImageView Setup

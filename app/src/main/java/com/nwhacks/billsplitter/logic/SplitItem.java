@@ -7,30 +7,28 @@ import java.util.ArrayList;
  */
 public class SplitItem {
     private String name;
-    private int quantity;
     private double price;
 
 
     private ArrayList<Person> participants = new ArrayList<>();
     private double costPerPerson;
 
-    public SplitItem(String name, double price, int quantity) {
+    public SplitItem(String name, double price) {
         this.name = name;
-        this.quantity = quantity;
         this.price = price;
         costPerPerson = price;
     }
     public void addParticipant(Person person) {
         participants.add(person);
-        costPerPerson = (price * quantity) / participants.size();
+        costPerPerson = price / participants.size();
     }
 
     public void removeParticipant(Person person) {
         participants.remove(person);
         if(participants.size() == 0) {
-            costPerPerson = price * quantity;
+            costPerPerson = price;
         } else {
-            costPerPerson = (price * quantity) / participants.size();
+            costPerPerson = price / participants.size();
         }
     }
 
@@ -39,7 +37,7 @@ public class SplitItem {
     }
 
     public double getTotalCost() {
-        return price * quantity;
+        return price;
     }
 
     public double getCostPerPerson() {
@@ -48,7 +46,7 @@ public class SplitItem {
 
     //for tax
     public double recalculateCostPerPerson() {
-        costPerPerson = (price*quantity)/participants.size();
+        costPerPerson = price/participants.size();
         return costPerPerson;
     }
 
@@ -58,14 +56,6 @@ public class SplitItem {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public double getPrice() {
