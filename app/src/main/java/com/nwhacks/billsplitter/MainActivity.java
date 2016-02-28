@@ -2,30 +2,23 @@ package com.nwhacks.billsplitter;
 
 import android.app.DialogFragment;
 import android.content.ClipData;
-import android.content.ClipDescription;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.DragEvent;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import com.nwhacks.billsplitter.logic.*;
 
 import com.nwhacks.billsplitter.logic.Bill;
+import com.nwhacks.billsplitter.logic.Person;
+import com.nwhacks.billsplitter.logic.SplitItem;
 
 import java.util.ArrayList;
 
@@ -38,13 +31,16 @@ public class MainActivity extends AppCompatActivity {
     String msg;
     private android.widget.RelativeLayout.LayoutParams layoutParams;
 
-    Bill bill = new Bill();
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        intent = getIntent();
+        Bill bill = (Bill)intent.getSerializableExtra("sendBill");
+        
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

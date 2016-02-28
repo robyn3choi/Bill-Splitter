@@ -1,11 +1,12 @@
 package com.nwhacks.billsplitter.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Ian Fong on 2016-02-27.
  */
-public class Bill {
+public class Bill implements Serializable{
     private static ArrayList<SplitItem> items = new ArrayList<>();
     private static ArrayList<Person> people = new ArrayList<>();
     private double tax;
@@ -26,36 +27,6 @@ public class Bill {
     public Bill() {
         tax = 0;
         withTip = false;
-    }
-
-    public void addItem(String name, double price, int quantity) {
-        SplitItem item = new SplitItem(name, price, quantity);
-        if(!items.contains(item)){
-            Bill.items.add(item);
-        }
-    }
-
-    public void removeItem(String name) {
-        for(SplitItem item: items) {
-            if(item.getName().equals(name)) {
-                items.remove(item);
-            }
-        }
-    }
-
-    public void addPerson(String name) {
-        Person person = new Person(name);
-        if(!people.contains(person)) {
-            people.add(person);
-        }
-    }
-
-    public void removePerson(String name) {
-        for(Person person: people) {
-            if(person.getName().equals(name)) {
-                people.remove(person);
-            }
-        }
     }
 
     public void addPersonToItem(Person person, SplitItem item) {

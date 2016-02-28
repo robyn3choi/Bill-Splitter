@@ -2,13 +2,15 @@ package com.nwhacks.billsplitter;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import java.util.ArrayList;
+
+import com.nwhacks.billsplitter.logic.Bill;
 import com.nwhacks.billsplitter.logic.Person;
 import com.nwhacks.billsplitter.logic.PersonAdapter;
 
@@ -16,16 +18,17 @@ import com.nwhacks.billsplitter.logic.PersonAdapter;
 public class SetUp extends AppCompatActivity {
 
     // Array of strings..
-    private ArrayList<Person> personList = new ArrayList<Person>();
     private EditText text;
     private PersonAdapter adapter;
+    public static Bill bill = new Bill();
+    Intent intent;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_up_listview);
         text = (EditText) findViewById(R.id.nameText);
-        adapter = new PersonAdapter(this, R.layout.set_up_textview, personList);
+        adapter = new PersonAdapter(this, R.layout.set_up_textview, bill.getPeople());
         final ListView listView = (ListView) findViewById(R.id.list_person);
         listView.setAdapter(adapter);
         listView.setClickable(true);
@@ -45,7 +48,7 @@ public class SetUp extends AppCompatActivity {
                     removeMessage.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int choice) {
-                                    personList.remove(position);
+                                    bill.getPeople().remove(position);
                                     adapter.notifyDataSetChanged();
                                     dialog.dismiss();
                                 }
@@ -56,12 +59,19 @@ public class SetUp extends AppCompatActivity {
             }
         });
     }
+
+    public void goToMain(View view){
+        intent = new Intent(this, MainActivity.class);
+        intent.putExtra("sendBill", bill);
+        startActivity(intent);
+    }
+
     //adds a person to a list
     public void addPerson(View v){
         if(text.getText().toString().trim().length() != 0) {
-            if(personList.size() < 12) {
+            if(bill.getPeople().size() < 12) {
                 String personName = text.getText().toString();
-                personList.add(new Person(personName));
+                bill.getPeople().add(new Person(personName));
                 adapter.notifyDataSetChanged();
                 text.setText("");
             }
