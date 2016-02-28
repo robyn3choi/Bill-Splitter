@@ -58,7 +58,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         txtListChild.setText(childText);
         TextView txt = (TextView) convertView.findViewById(R.id.textView);
-        String text = getChild(groupPosition, childPosition).getTotalPrice().toString();
+        String text = String.valueOf(this.headerItems.getItems().get(groupPosition).getCostPerPerson());
         txt.setText(text);
         return convertView;
     }
