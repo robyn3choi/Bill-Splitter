@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         intent = getIntent();
         Bill bill = (Bill)intent.getSerializableExtra("sendBill");
-        
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

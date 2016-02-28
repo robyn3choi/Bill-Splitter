@@ -53,7 +53,8 @@
         android:layout_height="wrap_content"
         android:text="Split"
         android:id="@+id/split_button"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:onClick="goToMain" />
 
 
 </LinearLayout>
