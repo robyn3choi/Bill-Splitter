@@ -7,7 +7,13 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+import com.nwhacks.billsplitter.logic.Person;
+
+public class SetUp extends AppCompatActivity {
+>>>>>>> 5435269798f693f49bca9efce54c8d8f07e8f3be
 
 public class SetUp extends AppCompatActivity {
 
