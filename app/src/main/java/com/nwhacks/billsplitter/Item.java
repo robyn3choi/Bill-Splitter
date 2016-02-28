@@ -1,5 +1,7 @@
 package com.nwhacks.billsplitter;
 
+import com.nwhacks.billsplitter.logic.Person;
+
 import java.util.ArrayList;
 
 /**

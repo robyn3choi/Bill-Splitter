@@ -13,13 +13,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nwhacks.billsplitter.logic.Bill;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Item> mealItems;
-    ArrayList<Person> guests;
-
+    Bill bill = new Bill();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +58,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         CircleLayout circleLayout = (CircleLayout) findViewById(R.id.circleLayout);
-        for(int x=0; x < guests.size(); x++) {
+        for(int x=0; x < bill.getPeople().size(); x++) {
             ImageView image = new ImageView(MainActivity.this);
             image.setBackgroundResource(R.mipmap.circle_icon);
             image.setId(x);
             circleLayout.addView(image);
 
             TextView guestName = new TextView(MainActivity.this);
-            guestName.setText(guests.get(x).getName());
+            guestName.setText(bill.getPeople().get(x).getName());
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.MATCH_PARENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -95,11 +95,4 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-    public void addMealItem(Item item) {
-        mealItems.add(item);
-    }
-
-
 }

@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.nwhacks.billsplitter.logic.Person;
+
 public class SetUp extends AppCompatActivity {
 
     // Array of strings...
