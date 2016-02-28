@@ -1,5 +1,6 @@
 package com.nwhacks.billsplitter;
 
+import android.app.DialogFragment;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.graphics.Color;
@@ -43,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment addDialog = new addFood();
+                addDialog.show(getFragmentManager(), "add");
+            }
+        });
 
         guests = bill.getPeople();
 
