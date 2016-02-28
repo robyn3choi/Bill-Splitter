@@ -32,13 +32,15 @@ public class MainActivity extends AppCompatActivity {
 
     Intent intent;
 
+    Bill bill;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         intent = getIntent();
-        Bill bill = (Bill)intent.getSerializableExtra("sendBill");
+        bill = (Bill)intent.getSerializableExtra("sendBill");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -184,5 +186,11 @@ public class MainActivity extends AppCompatActivity {
 
             guestName.setOnDragListener(new ImageDragListener());
         }
+    }
+
+    public void viewItems(View view){
+        intent = new Intent(this, FoodToPeople.class);
+        intent.putExtra("itemSend", bill);
+        startActivity(intent);
     }
 }

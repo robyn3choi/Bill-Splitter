@@ -12,12 +12,6 @@ import com.nwhacks.billsplitter.logic.Bill;
 import com.nwhacks.billsplitter.logic.Person;
 import com.nwhacks.billsplitter.logic.SplitItem;
 
-import org.w3c.dom.Text;
-
-import java.util.List;
-import java.util.Objects;
-import java.lang.Override;
-
 
 /**
  * Created by Johnny on 28/02/2016.
@@ -58,7 +52,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         txtListChild.setText(childText);
         TextView txt = (TextView) convertView.findViewById(R.id.textView);
-        String text = String.valueOf(this.headerItems.getItems().get(groupPosition).getCostPerPerson());
+        String text = String.format("$%.2f", this.headerItems.getItems().get(groupPosition).getCostPerPerson());
         txt.setText(text);
         return convertView;
     }
