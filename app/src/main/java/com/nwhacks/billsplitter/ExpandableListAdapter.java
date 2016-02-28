@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.nwhacks.billsplitter.logic.Bill;
@@ -52,8 +53,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         txtListChild.setText(childText);
         TextView txt = (TextView) convertView.findViewById(R.id.textView);
+        this.headerItems.getItems().get(groupPosition).recalculateCostPerPerson();
         String text = String.format("$%.2f", this.headerItems.getItems().get(groupPosition).getCostPerPerson());
         txt.setText(text);
+
+//        TextView percentage = (TextView) convertView.findViewById(R.id.percentage);
+
+
         return convertView;
     }
 

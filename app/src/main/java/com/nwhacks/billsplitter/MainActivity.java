@@ -54,6 +54,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button taxButton = (Button) findViewById(R.id.taxButton);
+        taxButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment addDialog = new CalculateTax();
+                addDialog.show(getFragmentManager(), "add");
+            }
+        });
+
         guests = bill.getPeople();
         mealItems = bill.getItems();
 
@@ -65,6 +74,22 @@ public class MainActivity extends AppCompatActivity {
 //                // go to itemsListActivity
 //            }
 //        });
+    }
+
+    public void calculateTax(double taxPercentage) {
+        double actualPercentage = taxPercentage*0.01+1;
+        for (int x=0; x<bill.getItems().size(); x++) {
+            SplitItem item = bill.getItems().get(x);
+            item.setPrice(item.getPrice() * actualPercentage);
+            item.recalculateCostPerPerson();
+        }
+
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout1);
+        TextView totalPrice = (TextView) relativeLayout.findViewById(R.id.totalPrice);
+        String text = "Total: $" + Double.toString(bill.getTotalCost());
+        totalPrice.setText(text);
+
+
     }
 
     /**
@@ -108,6 +133,9 @@ public class MainActivity extends AppCompatActivity {
             GradientDrawable drawable = (GradientDrawable) circleLayout.getChildAt(x).getBackground();
             drawable.setStroke(dpToPixels(3), Color.parseColor("#000000")); // set stroke width and stroke color
         }
+        String text = "Total: $" + Double.toString(bill.getTotalCost());
+        TextView totalPrice = (TextView) relativeLayout.findViewById(R.id.totalPrice);
+        totalPrice.setText(text);
 
     }
 
@@ -207,17 +235,19 @@ public class MainActivity extends AppCompatActivity {
             circleLayout.addView(guestName);
 
             guestName.setOnDragListener(new ImageDragListener());
-            guestName.setOnClickListener(new personOnClickListener());
+//            guestName.setOnClickListener(new personOnClickListener());
         }
     }
 
-    private class personOnClickListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-
-        }
-    }
+//    private class personOnClickListener implements View.OnClickListener {
+//
+//        @Override
+//        public void onClick(View v) {
+//            intent = new Intent(this, BLAH.class);
+//            intent.putExtra("itemSend", bill);
+//            startActivity(intent);
+//        }
+//    }
 
 
 

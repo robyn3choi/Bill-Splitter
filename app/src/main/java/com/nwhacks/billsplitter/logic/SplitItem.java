@@ -46,6 +46,12 @@ public class SplitItem {
         return costPerPerson;
     }
 
+    //for tax
+    public double recalculateCostPerPerson() {
+        costPerPerson = (price*quantity)/participants.size();
+        return costPerPerson;
+    }
+
     public String getName() {
         return name;
     }
