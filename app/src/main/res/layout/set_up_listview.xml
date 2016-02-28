@@ -1,14 +1,41 @@
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ListActivity" >
+    tools:context=".ListActivity"
+    android:weightSum="1">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true" >
+
+        <TextView
+            android:layout_width="59dp"
+            android:layout_height="match_parent"
+            android:id="@+id/nameTitle"
+            android:text="Name:"
+            android:layout_weight="0.19"
+            android:layout_gravity = "left"
+            android:textAlignment="center"
+            android:gravity="center_vertical" />
+
+        <EditText
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:id="@+id/nameText"
+            android:layout_weight="0.42"
+            android:singleLine="true"/>
+    </LinearLayout>
+
+
 
     <ListView
-        android:id="@+id/mobile_list"
-        android:layout_width="wrap_content"
-        android:layout_height="461dp" >
+        android:id="@+id/list_person"
+        android:layout_width="fill_parent"
+        android:layout_height="327dp">
     </ListView>
 
     <Button
@@ -17,7 +44,8 @@
         android:text="+"
         android:id="@+id/addPersonButton"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_button"/>
+        android:background="@drawable/rounded_button"
+        android:onClick="addPerson" />
 
 
 </LinearLayout>

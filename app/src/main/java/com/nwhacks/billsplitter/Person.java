@@ -5,11 +5,19 @@ package com.nwhacks.billsplitter;
  */
 public class Person {
 
-    String name;
-    Double totalPrice;
+    private String name;
+    private Double totalPrice;
 
-    Person(String name) {
+    public Person(String name) {
         this.name = name;
         totalPrice = 0.00;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 }
