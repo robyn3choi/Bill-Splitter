@@ -1,10 +1,11 @@
 package com.nwhacks.billsplitter.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * Created by Robyn on 2016-02-27.
  */
-public class Person {
+public class Person implements Serializable {
     String name;
     double totalPrice;
     private ArrayList<SplitItem> listOfItem = new ArrayList<>();
@@ -14,6 +15,7 @@ public class Person {
         totalPrice = 0.00;
         listOfItem = new ArrayList<SplitItem>();
     }
+
 
     public void addItem(SplitItem item) {
         listOfItem.add(item);

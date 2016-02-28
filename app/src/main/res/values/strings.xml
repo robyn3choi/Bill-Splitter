@@ -7,4 +7,7 @@
     <string name="price">price</string>
     <string name="quantity">quantity</string>
     <string name="itemName">item</string>
+    <string name="title_activity_user_summary">UserSummary</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

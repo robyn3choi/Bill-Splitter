@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ListActivity"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:id="@+id/layout">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

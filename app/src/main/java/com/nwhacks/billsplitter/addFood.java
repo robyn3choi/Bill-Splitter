@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -52,14 +53,11 @@ public class addFood extends DialogFragment {
                 public void onClick(View v) {
                     EditText itemNameText = (EditText) d.findViewById(R.id.ItemName);
                     EditText priceText = (EditText) d.findViewById(R.id.Price);
-                    EditText quantityText = (EditText) d.findViewById(R.id.Quantity);
-
                     String itemName = itemNameText.getText().toString();
                     String price = priceText.getText().toString();
-                    String quantity = quantityText.getText().toString();
 
                     MainActivity callingActivity = (MainActivity) getActivity();
-                    callingActivity.addFoodItem(itemName, price, quantity);
+                    callingActivity.addFoodItem(itemName, price);
                     d.dismiss();
                 }
             });
