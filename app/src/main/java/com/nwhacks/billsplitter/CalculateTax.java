@@ -1,32 +1,26 @@
 package com.nwhacks.billsplitter;
 
-/**
- * Created by Johnny on 28/02/2016.
- */
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-
 /**
- * Created by Johnny on 27/02/2016.
+ * Created by Robyn on 2016-02-28.
  */
-public class addFood extends DialogFragment {
+public class CalculateTax extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstance) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Add food item!");
+        builder.setTitle("Calculate Tax");
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        final View v = inflater.inflate(R.layout.dialog_add, null);
+        final View v = inflater.inflate(R.layout.dialog_calculate_tax, null);
         builder.setView(v)
                 .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
                     @Override
@@ -36,7 +30,7 @@ public class addFood extends DialogFragment {
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        addFood.this.getDialog().cancel();
+                        CalculateTax.this.getDialog().cancel();
                     }
                 });
         return builder.create();
@@ -51,17 +45,15 @@ public class addFood extends DialogFragment {
             positiveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EditText itemNameText = (EditText) d.findViewById(R.id.ItemName);
-                    EditText priceText = (EditText) d.findViewById(R.id.Price);
-                    String itemName = itemNameText.getText().toString();
-                    String price = priceText.getText().toString();
+                    EditText taxPercentageEditText = (EditText) d.findViewById(R.id.taxPercentage);
+
+                    Double taxPercentage = Double.parseDouble(taxPercentageEditText.getText().toString());
 
                     MainActivity callingActivity = (MainActivity) getActivity();
-                    callingActivity.addFoodItem(itemName, price);
+                    callingActivity.calculateTax(taxPercentage);
                     d.dismiss();
                 }
             });
         }
     }
-
 }

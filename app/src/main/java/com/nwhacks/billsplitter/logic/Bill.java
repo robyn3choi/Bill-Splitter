@@ -56,10 +56,11 @@ public class Bill implements Serializable{
         for(SplitItem item : items) {
             sum += item.getTotalCost();
         }
-        if(withTip) {
-            sum = sum * tip;
-        }
-        sum = sum * tax;
+
+//        if(withTip) {
+//            sum = sum * tip;
+//        }
+//        sum = sum * tax;
         return sum;
     }
 

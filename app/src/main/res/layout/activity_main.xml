@@ -9,6 +9,7 @@
     android:id="@+id/relativeLayout1">
 
 
+
     <com.nwhacks.billsplitter.CircleLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,7 +30,6 @@
         <!--android:layout_width="140dp"-->
         <!--android:layout_height="140dp"-->
         <!--android:layout_centerInParent="true"/>-->
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -70,6 +70,23 @@
             android:layout_marginBottom="95dp"
             android:layout_above="@+id/viewItemsButton"
             android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calculate Tax"
+            android:id="@+id/taxButton"
+            android:onClick="viewItems"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/totalPrice"
+            android:layout_alignBaseline="@+id/taxButton"
+            android:layout_alignBottom="@+id/taxButton"
+            android:layout_alignStart="@+id/viewItemsButton" />
 
     </RelativeLayout>
 

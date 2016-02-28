@@ -55,6 +55,15 @@ public class MainActivity extends AppCompatActivity implements Serializable{
             }
         });
 
+        Button taxButton = (Button) findViewById(R.id.taxButton);
+        taxButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment addDialog = new CalculateTax();
+                addDialog.show(getFragmentManager(), "add");
+            }
+        });
+
         guests = bill.getPeople();
         mealItems = bill.getItems();
 
@@ -68,15 +77,30 @@ public class MainActivity extends AppCompatActivity implements Serializable{
 //        });
     }
 
+    public void calculateTax(double taxPercentage) {
+        double actualPercentage = taxPercentage*0.01+1;
+        for (int x=0; x<bill.getItems().size(); x++) {
+            SplitItem item = bill.getItems().get(x);
+            item.setPrice(item.getPrice() * actualPercentage);
+            item.recalculateCostPerPerson();
+        }
+
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout1);
+        TextView totalPrice = (TextView) relativeLayout.findViewById(R.id.totalPrice);
+        String text = "Total: $" + Double.toString(bill.getTotalCost());
+        totalPrice.setText(text);
+
+
+    }
+
     /**
      * callback method from QuantityDialogFragment, returning the value of user
      * input.
      *
      */
-    public void addFoodItem(String itemName, String price, String quantity) {
+    public void addFoodItem(String itemName, String price) {
         Double priceDouble = Double.parseDouble(price);
-        int quantityInt = Integer.parseInt(quantity);
-        SplitItem item = new SplitItem(itemName, priceDouble, quantityInt);
+        SplitItem item = new SplitItem(itemName, priceDouble);
         bill.getItems().add(item);
 
         //ImageView Setup
@@ -109,6 +133,9 @@ public class MainActivity extends AppCompatActivity implements Serializable{
             GradientDrawable drawable = (GradientDrawable) circleLayout.getChildAt(x).getBackground();
             drawable.setStroke(dpToPixels(3), Color.parseColor("#000000")); // set stroke width and stroke color
         }
+        String text = "Total: $" + Double.toString(bill.getTotalCost());
+        TextView totalPrice = (TextView) relativeLayout.findViewById(R.id.totalPrice);
+        totalPrice.setText(text);
 
     }
 
@@ -207,6 +234,7 @@ public class MainActivity extends AppCompatActivity implements Serializable{
             guestName.setLayoutParams(params);
             circleLayout.addView(guestName);
             guestName.setOnDragListener(new ImageDragListener());
+<<<<<<< HEAD
             guestName.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view){
                     person = bill.getGuestFromName(guestName.getText().toString());
@@ -217,6 +245,21 @@ public class MainActivity extends AppCompatActivity implements Serializable{
             });
         }
     }
+=======
+//            guestName.setOnClickListener(new personOnClickListener());
+        }
+    }
+
+//    private class personOnClickListener implements View.OnClickListener {
+//
+//        @Override
+//        public void onClick(View v) {
+//            intent = new Intent(this, BLAH.class);
+//            intent.putExtra("itemSend", bill);
+//            startActivity(intent);
+//        }
+//    }
+>>>>>>> 4c671d7e4d420aec41b0db2c264818225053b8f0
 
     public int dpToPixels(int dp) {
         final float scale = getResources().getDisplayMetrics().density;
