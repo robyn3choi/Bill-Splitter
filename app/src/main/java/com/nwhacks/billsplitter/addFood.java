@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 /**
@@ -56,9 +57,15 @@ public class addFood extends DialogFragment {
                     String itemName = itemNameText.getText().toString();
                     String price = priceText.getText().toString();
 
-                    MainActivity callingActivity = (MainActivity) getActivity();
-                    callingActivity.addFoodItem(itemName, price);
-                    d.dismiss();
+                    if (itemName.isEmpty() || price.isEmpty()) {
+                        Toast.makeText(d.getContext(),
+                                getResources().getString(R.string.fill_blanks),
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        MainActivity callingActivity = (MainActivity) getActivity();
+                        callingActivity.addFoodItem(itemName, price);
+                        d.dismiss();
+                    }
                 }
             });
         }
