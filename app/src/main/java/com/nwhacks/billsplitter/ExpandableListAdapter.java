@@ -13,6 +13,8 @@ import com.nwhacks.billsplitter.logic.Bill;
 import com.nwhacks.billsplitter.logic.Person;
 import com.nwhacks.billsplitter.logic.SplitItem;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by Johnny on 28/02/2016.
@@ -27,9 +29,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Person getChild(int groupPosition, int childPosition) {
-        return this.headerItems.getItems().get(groupPosition).getParticipants().get(childPosition);
+    public ArrayList<String> getChild(int groupPosition, int childPosition) {
+        ArrayList<String> personAndCost = new ArrayList<String>();
+        String personName = this.headerItems.getItems().get(groupPosition).getParticipants().get(childPosition).getName();
+        double costPerPerson = this.headerItems.getItems().get(groupPosition).getCostPerPerson();
+        String costString = String.format("$%.2f", costPerPerson);
+        personAndCost.add(personName);
+        personAndCost.add(costString);
+        return personAndCost;
     }
+
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
@@ -40,7 +49,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
-        final String childText = getChild(groupPosition, childPosition).getName();
+        ArrayList<String> personAndCost = getChild(groupPosition, childPosition);
+        String person = personAndCost.get(0);
+        String cost = personAndCost.get(1);
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -48,23 +59,23 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.list_item, null);
         }
 
-        TextView txtListChild = (TextView) convertView
+        TextView personText = (TextView) convertView
                 .findViewById(R.id.lblListItem);
 
-        txtListChild.setText(childText);
+        personText.setText(person);
+
+
         EditText txt = (EditText) convertView.findViewById(R.id.textView);
-        this.headerItems.getItems().get(groupPosition).recalculateCostPerPerson();
-        String text = String.format("$%.2f", this.headerItems.getItems().get(groupPosition).getCostPerPerson());
 
-        if ( !(txt.getText().toString().equalsIgnoreCase("Medium Text")) && (txt.toString() != text) ) {
-            txt.setText(txt.getText().toString());
-        } else {
-            txt.setText(text);
+        String existingCostText = txt.getText().toString();
+        String actualCostText = String.format("$%.2f", this.headerItems.getItems().get(groupPosition).getCostPerPerson());
 
+        // getChildView runs twice
+        // the following ensures that only the correct costperperson is displayed in each group
+        if (existingCostText == actualCostText) {
+            return convertView;
         }
-
-//        TextView percentage = (TextView) convertView.findViewById(R.id.percentage);
-
+        txt.setText(cost);
 
         return convertView;
     }
