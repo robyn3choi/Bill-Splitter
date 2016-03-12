@@ -13,6 +13,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -54,8 +55,11 @@ public class addFood extends DialogFragment {
                 public void onClick(View v) {
                     EditText itemNameText = (EditText) d.findViewById(R.id.ItemName);
                     EditText priceText = (EditText) d.findViewById(R.id.Price);
+                    CheckBox liquorCheckBox = (CheckBox) d.findViewById(R.id.liquorCheckBox);
+
                     String itemName = itemNameText.getText().toString();
                     String price = priceText.getText().toString();
+                    boolean isLiquor = liquorCheckBox.isChecked();
 
                     if (itemName.isEmpty() || price.isEmpty()) {
                         Toast.makeText(d.getContext(),
@@ -63,7 +67,7 @@ public class addFood extends DialogFragment {
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         MainActivity callingActivity = (MainActivity) getActivity();
-                        callingActivity.addFoodItem(itemName, price);
+                        callingActivity.addFoodItem(itemName, price, isLiquor);
                         d.dismiss();
                     }
                 }

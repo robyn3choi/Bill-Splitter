@@ -9,15 +9,17 @@ import java.util.ArrayList;
 public class SplitItem implements Serializable{
     private String name;
     private double price;
+    private boolean isLiquor;
 
 
     private ArrayList<Person> participants = new ArrayList<>();
     private double costPerPerson;
 
-    public SplitItem(String name, double price) {
+    public SplitItem(String name, double price, boolean isLiquor) {
         this.name = name;
         this.price = price;
         costPerPerson = price;
+        this.isLiquor = isLiquor;
     }
     public void addParticipant(Person person) {
         participants.add(person);
@@ -65,5 +67,9 @@ public class SplitItem implements Serializable{
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public boolean getIsLiquor() {
+        return isLiquor;
     }
 }

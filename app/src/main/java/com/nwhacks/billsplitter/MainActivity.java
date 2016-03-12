@@ -81,16 +81,32 @@ public class MainActivity extends AppCompatActivity implements Serializable{
         double actualPercentage = taxPercentage*0.01+1;
         for (int x=0; x<bill.getItems().size(); x++) {
             SplitItem item = bill.getItems().get(x);
-            item.setPrice(item.getPrice() * actualPercentage);
-            item.recalculateCostPerPerson();
+            if (!item.getIsLiquor()) {
+                item.setPrice(item.getPrice() * actualPercentage);
+                item.recalculateCostPerPerson();
+            }
         }
 
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout1);
         TextView totalPrice = (TextView) relativeLayout.findViewById(R.id.totalPrice);
         String text = "Total: $" + Double.toString(bill.getTotalCost());
         totalPrice.setText(text);
+    }
 
+    public void calculateLiquorTax(double liquorTaxPercentage) {
+        double actualPercentage = liquorTaxPercentage*0.01+1;
+        for (int x=0; x<bill.getItems().size(); x++) {
+            SplitItem item = bill.getItems().get(x);
+            if (item.getIsLiquor()) {
+                item.setPrice(item.getPrice() * actualPercentage);
+                item.recalculateCostPerPerson();
+            }
+        }
 
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout1);
+        TextView totalPrice = (TextView) relativeLayout.findViewById(R.id.totalPrice);
+        String text = "Total: $" + String.format("%.2f", bill.getTotalCost());
+        totalPrice.setText(text);
     }
 
     /**
@@ -98,9 +114,9 @@ public class MainActivity extends AppCompatActivity implements Serializable{
      * input.
      *
      */
-    public void addFoodItem(String itemName, String price) {
+    public void addFoodItem(String itemName, String price, boolean isLiquor) {
         Double priceDouble = Double.parseDouble(price);
-        SplitItem item = new SplitItem(itemName, priceDouble);
+        SplitItem item = new SplitItem(itemName, priceDouble, isLiquor);
         bill.getItems().add(item);
 
         //ImageView Setup

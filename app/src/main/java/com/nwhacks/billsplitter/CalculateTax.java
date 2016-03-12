@@ -45,12 +45,29 @@ public class CalculateTax extends DialogFragment {
             positiveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EditText taxPercentageEditText = (EditText) d.findViewById(R.id.taxPercentage);
-
-                    Double taxPercentage = Double.parseDouble(taxPercentageEditText.getText().toString());
 
                     MainActivity callingActivity = (MainActivity) getActivity();
-                    callingActivity.calculateTax(taxPercentage);
+                    EditText taxPercentageEditText = (EditText) d.findViewById(R.id.taxPercentage);
+                    EditText liquorTaxPercentageEditText = (EditText) d.findViewById(R.id.liquorTaxPercentage);
+
+
+                    String taxPercentageString = taxPercentageEditText.getText().toString();
+                    String liquorTaxPercentageString = liquorTaxPercentageEditText.getText().toString();
+
+                    if (taxPercentageString.trim().length() != 0) {
+                        callingActivity.calculateTax(Double.parseDouble(taxPercentageString));
+                    }
+                    else {
+                        callingActivity.calculateTax(0);
+                    }
+
+                    if (liquorTaxPercentageString.trim().length() != 0) {
+                        callingActivity.calculateLiquorTax(Double.parseDouble(liquorTaxPercentageString));
+                    }
+                    else {
+                        callingActivity.calculateLiquorTax(0);
+                    }
+
                     d.dismiss();
                 }
             });

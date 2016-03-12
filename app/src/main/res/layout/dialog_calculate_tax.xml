@@ -3,24 +3,68 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="30dp">
+    android:layout_margin="30dp"
+    android:paddingLeft="20dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Enter tax percentage:"
-        android:layout_gravity="center"
-        android:id="@+id/textView2" />
+        android:id="@+id/textView2"
+        android:layout_marginTop="10dp" />
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp">
     <EditText
         android:id="@+id/taxPercentage"
-        android:layout_width="66dp"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="4dp"
+        android:inputType="numberDecimal"
+        android:editable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="%"
+            android:layout_gravity="center_vertical" />
+
+        </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Enter liquor tax percentage:"
+        android:id="@+id/liquorTaxView" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+    <EditText
+        android:id="@+id/liquorTaxPercentage"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
         android:inputType="numberDecimal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="%"
+            android:layout_gravity="center_vertical" />
+
+
+    </LinearLayout>
 
 </LinearLayout>
