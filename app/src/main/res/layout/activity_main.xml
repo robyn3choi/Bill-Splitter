@@ -6,22 +6,31 @@
     android:orientation="vertical"
     tools:context=".MainActivity"
     android:clipChildren="false"
+    android:background="#0000"
     android:id="@+id/relativeLayout1">
 
+    <!--<RelativeLayout-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:clipChildren="false"-->
+        <!--android:background="#0000"-->
+        <!--android:layout_centerInParent="true">-->
 
+        <com.nwhacks.billsplitter.CircleLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#0000"
+            app:angleOffset="90.0"
+            android:id="@+id/circleLayout"
+            android:layout_gravity="fill"
+            android:clipChildren="false"
+            >
 
-    <com.nwhacks.billsplitter.CircleLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        app:angleOffset="90.0"
-        android:id="@+id/circleLayout"
-        android:layout_gravity="fill"
-        android:clipChildren="false">
+            <!-- Add here any views you want -->
 
-        <!-- Add here any views you want -->
+        </com.nwhacks.billsplitter.CircleLayout>
 
-    </com.nwhacks.billsplitter.CircleLayout>
+    <!--</RelativeLayout>-->
 
 
     <!--<ImageView-->

@@ -260,7 +260,7 @@ public class CircleLayout extends ViewGroup {
         final int height = getHeight();
 
         final float minDimen = width > height ? height : width;
-        final float radius = (minDimen - mInnerRadius)/2f;
+        final float radius = (float) 0.8*(minDimen - mInnerRadius)/2f;
 
         mBounds.set(width/2 - minDimen/2, height/2 - minDimen/2, width/2 + minDimen/2, height/2 + minDimen/2);
 

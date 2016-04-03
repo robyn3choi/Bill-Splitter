@@ -144,11 +144,11 @@ public class MainActivity extends AppCompatActivity implements Serializable{
 
         plateIcon.setOnTouchListener(new ImageTouchListener());
 
-        CircleLayout circleLayout = (CircleLayout) findViewById(R.id.circleLayout);
-        for (int x=0; x<circleLayout.getChildCount(); x++) {
-            GradientDrawable drawable = (GradientDrawable) circleLayout.getChildAt(x).getBackground();
-            drawable.setStroke(dpToPixels(3), Color.parseColor("#000000")); // set stroke width and stroke color
-        }
+//        CircleLayout circleLayout = (CircleLayout) findViewById(R.id.circleLayout);
+//        for (int x=0; x<circleLayout.getChildCount(); x++) {
+//            GradientDrawable drawable = (GradientDrawable) circleLayout.getChildAt(x).getBackground();
+//            drawable.setStroke(dpToPixels(3), Color.parseColor("#000000")); // set stroke width and stroke color
+//        }
 
         String text = "Total: " + String.format("$%.2f", bill.getTotalCost());
         TextView totalPrice = (TextView) relativeLayout.findViewById(R.id.totalPrice);
